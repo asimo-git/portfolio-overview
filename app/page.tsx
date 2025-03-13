@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+import Modal from "./conponents/Modal/Modal";
 import styles from "./page.module.css";
 
 type Asset = {
@@ -11,11 +14,36 @@ type Asset = {
 const assets: Asset[] = [];
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddAsset = (asset: { name: string; quantity: number }) => {
+    console.log(asset);
+  };
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.title}>Список активов</h1>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsModalOpen(true);
+            }}
+            className={styles.addButton}
+          >
+            Добавить актив
+          </button>
+
+          {isModalOpen && (
+            <Modal
+              onClose={() => {
+                setIsModalOpen(false);
+              }}
+              onAdd={handleAddAsset}
+            />
+          )}
+
           {assets.length === 0 ? (
             <div>Список активов пуст</div>
           ) : (
