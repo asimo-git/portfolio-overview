@@ -14,7 +14,7 @@ export interface Ticker24hrData {
 export interface Asset {
   name: string;
   quantity: number;
-  price: number | string;
+  price: number;
   cost: number;
   change: number;
   portfolioShare: number;

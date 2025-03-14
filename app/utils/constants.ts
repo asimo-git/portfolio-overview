@@ -3,7 +3,6 @@ export const MAJOR_CURRENCIES = [
   "BTC",
   "ETH",
   "BNB",
-  "BCC",
   "NEO",
   "LTC",
   "QTUM",
