@@ -14,10 +14,6 @@ export default function Modal({ onClose, onAdd }: Props) {
   const [customCurrency, setCustomCurrency] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
 
-  useEffect(() => {
-    console.log("Modal is open");
-  }, []);
-
   const handleEscPress = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "Escape") {

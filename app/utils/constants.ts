@@ -1,6 +1,5 @@
 export const MAJOR_CURRENCIES = [
   "TRY",
-  "USDT",
   "BTC",
   "ETH",
   "BNB",
