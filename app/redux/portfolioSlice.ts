@@ -17,7 +17,6 @@ const initialState: PortfolioState = {
 
 let websocket: WebSocket | null = null;
 const subscribedPairs: Set<string> = new Set();
-console.log("start", subscribedPairs);
 
 const sendRequest = (
   pair: string,
@@ -31,7 +30,6 @@ const sendRequest = (
         id: Date.now(),
       })
     );
-    console.log(`📡 ${method} на ${pair.toLowerCase()}usdt@ticker`);
   }
 };
 
@@ -63,7 +61,6 @@ export const addAssetAsync = createAsyncThunk(
     if (!subscribedPairs.has(newAsset.name)) {
       sendRequest(newAsset.name, "SUBSCRIBE");
       subscribedPairs.add(newAsset.name);
-      console.log(subscribedPairs);
     }
 
     return {
@@ -94,8 +91,6 @@ export const initializeWebSocket = createAsyncThunk<
   websocket = new WebSocket("wss://stream.binance.com:9443/ws");
 
   websocket.onopen = () => {
-    console.log("WebSocket соединение установлено");
-
     subscribedPairs.forEach((pair) => {
       sendRequest(pair, "SUBSCRIBE");
     });
@@ -112,8 +107,6 @@ export const initializeWebSocket = createAsyncThunk<
   };
 
   websocket.onclose = () => {
-    console.log("WebSocket соединение закрыто");
-
     setTimeout(() => {
       dispatch(initializeWebSocket());
     }, 5000);
@@ -148,15 +141,6 @@ export const initializeWebSocket = createAsyncThunk<
   };
 });
 
-// Thunk для обновления подписок
-export const subscribeToAsset = (assetName: string) => {
-  if (!subscribedPairs.has(assetName)) {
-    sendRequest(assetName, "SUBSCRIBE");
-    subscribedPairs.add(assetName);
-  }
-};
-
-// Thunk для отписки от актива
 export const removeAssetAsync = createAsyncThunk<
   void,
   string,
