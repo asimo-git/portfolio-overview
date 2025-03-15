@@ -11,7 +11,6 @@ type Props = {
 export default function Modal({ onClose, onAdd }: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [selectedCurrency, setSelectedCurrency] = useState<string>("");
-  const [customCurrency, setCustomCurrency] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleEscPress = useCallback(
@@ -48,10 +47,8 @@ export default function Modal({ onClose, onAdd }: Props) {
   }, [handleEscPress]);
 
   const handleSubmit = () => {
-    const currency = customCurrency || selectedCurrency;
-    if (!currency || quantity <= 0) return;
-
-    onAdd({ name: currency.toUpperCase(), quantity });
+    if (!selectedCurrency || quantity <= 0) return;
+    onAdd({ name: selectedCurrency, quantity });
     onClose();
   };
 
@@ -65,7 +62,6 @@ export default function Modal({ onClose, onAdd }: Props) {
           value={selectedCurrency}
           onChange={(e) => {
             setSelectedCurrency(e.target.value);
-            setCustomCurrency("");
           }}
           className={styles.input}
         >
@@ -76,18 +72,6 @@ export default function Modal({ onClose, onAdd }: Props) {
             </option>
           ))}
         </select>
-
-        <label className={styles.label}>Или введите вручную:</label>
-        <input
-          type="text"
-          value={customCurrency}
-          onChange={(e) => {
-            setCustomCurrency(e.target.value);
-            setSelectedCurrency("");
-          }}
-          className={styles.input}
-          placeholder="Например, DOGE"
-        />
 
         <label className={styles.label}>Количество:</label>
         <input
