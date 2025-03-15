@@ -59,7 +59,7 @@ npm run start
 
 ## Деплой
 
-Демо-версия приложения доступна по адресу: ([http://localhost:3000](https://crypto-tracker-asimo.vercel.app/))
+Демо-версия приложения доступна по адресу: ([crypto-tracker-asimo.vercel.app](https://crypto-tracker-asimo.vercel.app/))
 
 ---
 
