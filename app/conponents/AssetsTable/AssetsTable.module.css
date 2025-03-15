@@ -39,6 +39,17 @@
   color: red;
 }
 
+.removeBtn {
+  border: none;
+  background-color: transparent;
+  padding: 2px;
+  margin-right: 10px;
+}
+
+.removeBtn:hover {
+  background-color: #ccc;
+}
+
 @media (max-width: 768px) {
   .header,
   .row {

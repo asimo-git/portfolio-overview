@@ -17,6 +17,7 @@ const initialState: PortfolioState = {
 
 let websocket: WebSocket | null = null;
 const subscribedPairs: Set<string> = new Set();
+console.log("start", subscribedPairs);
 
 const sendRequest = (
   pair: string,
@@ -62,6 +63,7 @@ export const addAssetAsync = createAsyncThunk(
     if (!subscribedPairs.has(newAsset.name)) {
       sendRequest(newAsset.name, "SUBSCRIBE");
       subscribedPairs.add(newAsset.name);
+      console.log(subscribedPairs);
     }
 
     return {
@@ -155,17 +157,19 @@ export const subscribeToAsset = (assetName: string) => {
 };
 
 // Thunk для отписки от актива
-export const unsubscribeFromAsset = createAsyncThunk<
+export const removeAssetAsync = createAsyncThunk<
   void,
   string,
-  { dispatch: AppDispatch }
->("portfolio/unsubscribeFromAsset", async (assetName, { getState }) => {
-  const state = getState() as { portfolio: PortfolioState };
-  const assetExists = state.portfolio.assets.some(
+  { dispatch: AppDispatch; state: { portfolio: PortfolioState } }
+>("portfolio/removeAsset", async (assetName, { dispatch, getState }) => {
+  dispatch(removeAsset(assetName));
+
+  const state = getState();
+  const assetStillExists = state.portfolio.assets.some(
     (asset) => asset.name === assetName
   );
 
-  if (!assetExists && subscribedPairs.has(assetName)) {
+  if (!assetStillExists) {
     sendRequest(assetName, "UNSUBSCRIBE");
     subscribedPairs.delete(assetName);
   }

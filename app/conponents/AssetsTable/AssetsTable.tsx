@@ -1,5 +1,5 @@
 "use client";
-import { addAssetAsync } from "@/app/redux/portfolioSlice";
+import { addAssetAsync, removeAssetAsync } from "@/app/redux/portfolioSlice";
 import { AppDispatch, RootState } from "@/app/redux/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,7 +58,16 @@ export default function AssetsTable() {
               </div>
               {assets.map((asset, index) => (
                 <div key={index} className={styles.row}>
-                  <div>{asset.name}</div>
+                  <div>
+                    <button
+                      className={styles.removeBtn}
+                      title="Удалить актив"
+                      onClick={() => dispatch(removeAssetAsync(asset.name))}
+                    >
+                      ❌
+                    </button>
+                    <span>{asset.name}</span>
+                  </div>
                   <div>{asset.quantity}</div>
                   <div>${asset.price.toLocaleString()}</div>
                   <div>${asset.cost.toLocaleString()}</div>
