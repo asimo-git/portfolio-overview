@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useEffect } from "react";
 import { Provider } from "react-redux";
-import { updatePricesAsync } from "./portfolioSlice";
+import { initializeWebSocket, updatePricesAsync } from "./portfolioSlice";
 import { store } from "./store";
 
 export default function ReduxProvider({ children }: PropsWithChildren) {
@@ -17,6 +17,8 @@ export default function ReduxProvider({ children }: PropsWithChildren) {
           type: "portfolio/endLoading",
         });
       }
+
+      store.dispatch(initializeWebSocket());
 
       const unsubscribe = store.subscribe(() => {
         localStorage.setItem(
