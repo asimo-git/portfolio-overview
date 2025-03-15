@@ -44,7 +44,7 @@ export default function Modal({ onClose, onAdd }: Props) {
       window.removeEventListener("keydown", handleEscPress);
       window.removeEventListener("click", handleOutsideClick);
     };
-  }, [handleEscPress]);
+  }, [handleEscPress, handleOutsideClick]);
 
   const handleSubmit = () => {
     if (!selectedCurrency || quantity <= 0) return;
