@@ -1,7 +1,7 @@
 "use client";
 import { MAJOR_CURRENCIES } from "@/app/utils/constants";
 import { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./Modal.module.css";
+import styles from "./Modal.module.scss";
 
 type Props = {
   onClose: () => void;

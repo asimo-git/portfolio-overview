@@ -1,5 +1,5 @@
 import AssetsTable from "./conponents/AssetsTable/AssetsTable";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import ReduxProvider from "./redux/ReduxProvider";
 
 export default function Home() {

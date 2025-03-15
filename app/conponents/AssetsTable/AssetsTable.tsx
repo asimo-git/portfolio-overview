@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "@/app/redux/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../Modal/Modal";
-import styles from "./AssetsTable.module.css";
+import styles from "./AssetsTable.module.scss";
 
 export default function AssetsTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
